@@ -33,6 +33,9 @@ class Licitacao(models.Model):
         default='rascunho'
     )
 
+    class Meta:
+        verbose_name_plural = "Licitações"
+
     def __str__(self):
         return f'{self.numero_processo} | {self.objeto}'
     
@@ -50,5 +53,8 @@ class Fornecedores(models.Model):
     email = models.EmailField(blank=True)
     telefone = models.CharField(max_length=20, blank=True)
 
+    class Meta:
+        verbose_name_plural = "Fornecedores"
+
     def __str__(self):
-        return 'Fornecedores'
+        return self.razao_social
