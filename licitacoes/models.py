@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# TABELA DE PROCESSOS
 class Licitacao(models.Model):
     
     STATUS_CHOICES = {
@@ -13,6 +13,7 @@ class Licitacao(models.Model):
         ('digitalizado', 'Digitalizado'),
     }
 
+    # dados do processo
     numero_processo = models.CharField(
         max_length=15, 
         unique=True
@@ -33,12 +34,20 @@ class Licitacao(models.Model):
         default='rascunho'
     )
 
+    # campo de vencedores
+    fornecedores_vencedores = models.ManyToManyField(
+        'Fornecedores',
+        blank=True,
+        verbose_name='Vencedores do Processo'
+    )
+
     class Meta:
         verbose_name_plural = "Licitações"
 
     def __str__(self):
         return f'{self.numero_processo} | {self.objeto}'
     
+# TABELA DE FORNECEDORES
 class Fornecedores(models.Model):
 
     TYPE_CHOICES = {
@@ -52,6 +61,7 @@ class Fornecedores(models.Model):
     cnpj = models.CharField(max_length=20)
     email = models.EmailField(blank=True)
     telefone = models.CharField(max_length=20, blank=True)
+    endereco = models.CharField(max_length=100, blank=True)
 
     class Meta:
         verbose_name_plural = "Fornecedores"

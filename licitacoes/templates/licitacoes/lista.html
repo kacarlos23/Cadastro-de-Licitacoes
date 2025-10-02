@@ -1,0 +1,10 @@
+{% extends ".\base.html" %}
+
+{% block content %}
+    <h2>Processos Homologados</h2>
+    {% for licitacao in licitacoes %}
+        <ul>
+            <li>{{ licitacao.numero_processo }}</li>
+        </ul>
+    {% endfor %}
+{% endblock %}
